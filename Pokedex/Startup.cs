@@ -6,6 +6,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Pokedex.Clients;
 using Pokedex.Clients.Pokemon;
+using Pokedex.Clients.Translator;
 
 namespace Pokedex
 {
@@ -24,9 +25,10 @@ namespace Pokedex
             services.AddHttpClient();
             services.AddControllers();
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {Title = "Pokedex", Version = "v1"}); });
-            
+
             services.AddScoped(typeof(IGenericClient<>), typeof(GenericClient<>));
             services.AddScoped<IPokemonClient, PokemonClient>();
+            services.AddScoped<ITranslatorClient, TranslatorClient>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
