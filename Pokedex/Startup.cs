@@ -7,6 +7,7 @@ using Microsoft.OpenApi.Models;
 using Pokedex.Clients;
 using Pokedex.Clients.Pokemon;
 using Pokedex.Clients.Translator;
+using Pokedex.Filters;
 
 namespace Pokedex
 {
@@ -23,7 +24,11 @@ namespace Pokedex
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddHttpClient();
-            services.AddControllers();
+            services.AddControllers(options =>
+                {
+                    options.Filters.Add<HttpResponseExceptionFilter>();
+                }
+            );
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {Title = "Pokedex", Version = "v1"}); });
 
             services.AddScoped(typeof(IGenericClient<>), typeof(GenericClient<>));
