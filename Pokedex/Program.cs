@@ -16,6 +16,8 @@ namespace Pokedex
                 .ConfigureServices((context, services) =>
                 {
                     var configurationRoot = context.Configuration;
+                    services.Configure<RemoteApiUrls>(
+                        configurationRoot.GetSection(nameof(RemoteApiUrls)));
                 })
                 .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
     }
