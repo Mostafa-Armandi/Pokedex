@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json.Serialization;
-using System.Text.RegularExpressions;
 
 namespace Pokedex.Clients.Pokemon
 {
@@ -21,7 +20,7 @@ namespace Pokedex.Clients.Pokemon
             FlavorTextEntries
                 .FirstOrDefault(_ => _.Language.Name.ToLower() == "en")?.FlavorText
                 .Replace("\n", " ")
-                .Replace("\t", " ")
+                .Replace("\f", " ")
                 .Replace("\r", " ");
 
         public string HabitatName => Habitat.Name;
