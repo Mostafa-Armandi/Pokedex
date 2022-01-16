@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Logging;
 using Pokedex.Exceptions;
@@ -30,7 +31,7 @@ namespace Pokedex.Filters
                 context.ExceptionHandled = true;
                 _logger.LogError(exception, "Remote endpoint invocation finished with error");
             }
-            else
+            else if (context.Exception is not null)
             {
                 _logger.LogError(context.Exception, "An unhandled exception occured");
             }
